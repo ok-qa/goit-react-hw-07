@@ -1,32 +1,33 @@
 import { useSelector } from "react-redux";
+import { getError, getIsLoading } from "../../redux/selectors";
+import { getFilteredContacts } from "../../redux/contactsSlice";
+import Loader from "../Loader/Loader";
 import Contact from "../Contact/Contact";
-import { selectNameFilter } from "../../redux/filtersSlice";
-// import { selectContacts } from "../../redux/contactsSlice";
 import css from "./ContactList.module.css";
-import { fetchContacts } from "../../redux/contactsOps";
+
+// import { selectNameFilter } from "../../redux/filtersSlice";
+// import { selectContacts } from "../../redux/contactsSlice";
+// import { fetchContacts } from "../../redux/contactsOps";
 
 const ContactList = () => {
-  const contacts = useSelector(fetchContacts);
-  const searchValue = useSelector(selectNameFilter);
-
-  const visibleContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const visibleContacts = useSelector(getFilteredContacts);
+  const error = useSelector(getError);
+  const isLoading = useSelector(getIsLoading);
 
   return (
     <ul className={css.contactList}>
       {isLoading && !error ? (
-      <Loader />
+        <Loader />
       ) : visibleContacts.length === 0 && !error ? (
-        <p>Your Phonebook is empty. Start filling it in by adding your first contact</p>
+        <p>
+          Your Phonebook is empty. Start filling it in by adding your first
+          contact
+        </p>
       ) : (
-      visibleContacts.map(({ id, name, number }) => (
-        <Contact key={id} id={id} name={name} number={number} />
-      ))
-      )
-      }
-
-
+        visibleContacts.map(({ id, name, number }) => (
+          <Contact key={id} id={id} name={name} number={number} />
+        ))
+      )}
     </ul>
   );
 };
