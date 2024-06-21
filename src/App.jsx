@@ -1,13 +1,13 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ContactList from "./components/ContactList/ContactList";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
-import Loader from "./components/Loader/Loader";
-import css from "./App.module.css";
-import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "./components/ErrorMsg/ErrorMsg";
+import Loader from "./components/Loader/Loader";
 import { getError, getIsLoading } from "./redux/selectors";
-import { useEffect } from "react";
 import { fetchContacts } from "./redux/contactsOps";
+import css from "./App.module.css";
 
 function App() {
   const isLoading = useSelector(getIsLoading);

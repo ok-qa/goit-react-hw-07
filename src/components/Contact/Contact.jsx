@@ -1,13 +1,12 @@
-import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { deleteChosenContact } from "../../redux/contactsOps";
+import { deleteContact } from "../../redux/contactsOps";
 import css from "./Contact.module.css";
 
 const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
   const onDelete = (id) => {
-    dispatch(deleteChosenContact(id));
+    dispatch(deleteContact(id));
   };
 
   return (
@@ -51,10 +50,10 @@ const Contact = ({ id, name, number }) => {
   );
 };
 
-Contact.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-};
+// Contact.propTypes = {
+//   id: PropTypes.string.isRequired,
+//   name: PropTypes.string.isRequired,
+//   number: PropTypes.string.isRequired,
+// };
 
 export default Contact;
